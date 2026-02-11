@@ -45,14 +45,24 @@ class NonMotorAgent:
 
     def load_data(self, filename: str = None):
         if filename is None:
-            filename = config.NON_MOTOR_FILE
+            filename = getattr(config, 'NON_MOTOR_FILE', 'non_motor_merged.csv')
             
         file_path = self.data_dir / filename
         if not file_path.exists():
-            print(f"Warning: Non-Motor data file not found at {file_path}")
-            return
+            print(f"[{self.__class__.__name__}] Warning: Data file not found at {file_path}")
+            # Try looking in base dir as fallback
+            if (config.BASE_DIR / filename).exists():
+                 file_path = config.BASE_DIR / filename
+                 print(f"[{self.__class__.__name__}] Found data at fallback: {file_path}")
+            else:
+                 return
 
-        df = pd.read_csv(file_path)
+        try:
+            df = pd.read_csv(file_path)
+            print(f"[{self.__class__.__name__}] Loaded {len(df)} records from {file_path.name}")
+        except Exception as e:
+            print(f"[{self.__class__.__name__}] Error loading CSV: {e}")
+            return
         
         # Standardize columns
         if 'patient_id' in df.columns:

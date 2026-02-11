@@ -11,14 +11,14 @@ class Config:
         # Base Paths
         if self.IS_COLAB:
             self.BASE_DIR = Path('/content')
-            self.DATA_DIR = self.BASE_DIR
+            self.DATA_DIR = self.BASE_DIR # Data often uploaded to root or mounted from Drive
         else:
             # Assumes running from project root or similar. Adjust as needed.
             self.BASE_DIR = Path(os.getcwd())
             self.DATA_DIR = self.BASE_DIR / 'data'
-            # Fallback if specific data files are in known locations
+            # Fallback if specific data files are in known locations or root
             if not self.DATA_DIR.exists():
-                self.DATA_DIR = self.BASE_DIR # Try current dir
+                self.DATA_DIR = self.BASE_DIR 
 
         # Subdirectories
         self.CHECKPOINT_DIR = self.BASE_DIR / 'checkpoints'
@@ -48,6 +48,7 @@ class Config:
 
         # Data Config
         self.MOTOR_FILE = 'motor_merged.csv'
-        self.NON_MOTOR_FILE = 'merged_non_motor_data.csv'
+        self.NON_MOTOR_FILE = 'non_motor_merged.csv' # Corrected filename
+        self.DATSCAN_FILE = 'datscan.csv' # Added biomarker file
 
 config = Config()

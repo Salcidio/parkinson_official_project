@@ -18,7 +18,7 @@ from brain.lssm import BrainLSSM
 from motor_agent.agents.version2.motor_agent import MotorAgent
 from non_motor.agent.non_motor_agent import NonMotorAgent
 
-def train():
+def train(validate_only=False):
     print(f"Initializing agents and loading data from {config.DATA_DIR}...")
     
     # Initialize agents
@@ -35,9 +35,15 @@ def train():
     
     if not common_pats:
         print("Error: No common patients found between Motor and Non-Motor datasets.")
+        print(f"Motor patients: {len(motor_pats)}")
+        print(f"Non-Motor patients: {len(non_motor_pats)}")
         return
         
     print(f"Found {len(common_pats)} common patients.")
+
+    if validate_only:
+        print("Validation successful. Data loaded and agents initialized.")
+        return
     
     # Initialize Brain
     # Update input dimensions based on agents
