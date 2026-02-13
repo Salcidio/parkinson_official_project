@@ -45,9 +45,9 @@ class ODEFunc(nn.Module):
             batch_size = h.shape[0]
             # Match u dimension to Config (needs to be dynamic or fixed)
             # For now, we append zeros if self.u is missing, logic handled in valid flow
-             # But here we need valid tensor. 
-             # For simplicity, we assume U is set before forward.
-             raise ValueError("Control input 'u' must be set via set_control() before integration.")
+            # But here we need valid tensor. 
+            # For simplicity, we assume U is set before forward.
+            raise ValueError("Control input 'u' must be set via set_control() before integration.")
         
         # Concatenate state and control
         # Note: In a true continuous system, u might vary with t. 

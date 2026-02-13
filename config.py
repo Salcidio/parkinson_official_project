@@ -49,7 +49,7 @@ class Config:
 
         # Data Config
         self.MOTOR_FILE = 'motor_agent/data/formatted_parkinsons_dataset_dataset1.csv'
-        self.NON_MOTOR_FILE = 'non-motor/data/processed/merged_non_motor_data.csv' 
+        self.NON_MOTOR_FILE = 'non_motor/data/processed/merged_non_motor_data.csv' 
         self.BIOLOGICAL_FILE = 'biomarker/data/datscan.csv'
 
 config = Config()
