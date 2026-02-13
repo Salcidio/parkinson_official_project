@@ -27,7 +27,7 @@ def verify():
     required_files = [
         ('Motor', config.MOTOR_FILE),
         ('Non-Motor', config.NON_MOTOR_FILE),
-        ('Datscan', getattr(config, 'DATSCAN_FILE', 'datscan.csv'))
+        ('Biological', config.BIOLOGICAL_FILE)
     ]
     
     all_files_found = True

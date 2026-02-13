@@ -67,9 +67,7 @@ class BrainLSSM(nn.Module):
         self.latent_dim = config.LATENT_DIM
         
         # Combined input dim from all agents
-        # We need to define how they are combined. Concatenated? 
-        # Assuming concatenation of Motor + NonMotor
-        self.input_dim = config.INPUT_DIM_MOTOR + config.INPUT_DIM_NON_MOTOR
+        self.input_dim = config.INPUT_DIM_MOTOR + config.INPUT_DIM_NON_MOTOR + config.INPUT_DIM_BIOLOGICAL
         
         self.ode_func = ODEFunc(self.latent_dim, config.HIDDEN_DIM, self.input_dim)
         
@@ -108,15 +106,16 @@ class BrainLSSM(nn.Module):
             
         return torch.stack(trajectory)
 
-    def forward(self, h0, t_span, u_motor, u_non_motor):
+    def forward(self, h0, t_span, u_motor, u_non_motor, u_biological):
         """
         h0: Initial state (batch, latent_dim)
         t_span: Time points (T,)
         u_motor: Motor input (batch, input_dim_motor)
         u_non_motor: Non-motor input (batch, input_dim_non_motor)
+        u_biological: Biological input (batch, input_dim_biological)
         """
         # Combine inputs
-        u_combined = torch.cat([u_motor, u_non_motor], dim=-1)
+        u_combined = torch.cat([u_motor, u_non_motor, u_biological], dim=-1)
         
         # Integrate to get trajectory
         # trajectory shape: (T, batch, latent_dim)

@@ -37,6 +37,7 @@ class Config:
         self.HIDDEN_DIM = 64
         self.INPUT_DIM_MOTOR = 8  # Example size
         self.INPUT_DIM_NON_MOTOR = 8 # Example size
+        self.INPUT_DIM_BIOLOGICAL = 4 # Left/Right Putamen/Caudate
         self.ODE_TOL = 1e-3
         self.SOLVER_METHOD = 'rk4' # 'euler', 'rk4'
 
@@ -48,7 +49,7 @@ class Config:
 
         # Data Config
         self.MOTOR_FILE = 'motor_merged.csv'
-        self.NON_MOTOR_FILE = 'non_motor_merged.csv' # Corrected filename
-        self.DATSCAN_FILE = 'datscan.csv' # Added biomarker file
+        self.NON_MOTOR_FILE = 'non_motor_merged.csv' 
+        self.BIOLOGICAL_FILE = 'datscan.csv'
 
 config = Config()
