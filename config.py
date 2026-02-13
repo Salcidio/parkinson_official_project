@@ -9,14 +9,17 @@ class Config:
         self.IS_COLAB = 'google.colab' in sys.modules
         
         # Base Paths
+        self.PROJECT_ROOT = Path(__file__).resolve().parent
+        
         if self.IS_COLAB:
-            self.BASE_DIR = Path('/content')
-            self.DATA_DIR = self.BASE_DIR # Data often uploaded to root or mounted from Drive
+            # In Colab, we might be in /content or in a cloned repo /content/repo_name
+            # If our files exist relative to where this config.py is, use that.
+            self.BASE_DIR = self.PROJECT_ROOT
+            self.DATA_DIR = self.BASE_DIR 
         else:
-            # Assumes running from project root or similar. Adjust as needed.
-            self.BASE_DIR = Path(os.getcwd())
+            self.BASE_DIR = self.PROJECT_ROOT
             self.DATA_DIR = self.BASE_DIR / 'data'
-            # Fallback if specific data files are in known locations or root
+            # Fallback to root if 'data' folder doesn't exist
             if not self.DATA_DIR.exists():
                 self.DATA_DIR = self.BASE_DIR 
 
