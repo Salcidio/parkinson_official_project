@@ -1,0 +1,2 @@
+# Each encoder should be able to take a patient id and a date and return the latent control vector u_motor for that patient at that date. -- im not sure how to insert properly the data information
+# The
