@@ -111,7 +111,7 @@ class MotorAgent:
     def get_encoder(self):
         return self.encoder
 
-    def encode(self, patient_id: int, date: str) -> torch.Tensor:
+    def encode(self, patient_id: int, date: str = None) -> torch.Tensor:
         """
         Returns the latent control vector u_motor for a specific patient at a specific time.
         If data is missing for that exact date, we interpolate or take nearest.
