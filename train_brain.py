@@ -30,7 +30,7 @@ def train(validate_only=False):
     non_motor_agent.load_data()
 
     biological_agent = BiologicalAgent()
-    biological_agent.load_data()
+    biological_agent.load_data()    
     
     # Identify common patients
     motor_pats = set(motor_agent.patient_data.keys())
